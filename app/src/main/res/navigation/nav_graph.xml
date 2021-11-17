@@ -19,9 +19,6 @@
       android:name="com.martin.marsdemo.detail.DetailFragment"
       android:label="DetailFragment"
       tools:layout="@layout/fragment_detail">
-    <!--
-      12. 加上 selectedProperty 參數
-    -->
     <argument
       android:name="selectedProperty"
       app:argType="com.martin.marsdemo.network.MarsProperty"/>

@@ -24,13 +24,10 @@ class DetailFragment : Fragment() {
         val binding = FragmentDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        // 15. 從 fragment arguments 取得 selectedProperty
         val marsProperty = DetailFragmentArgs.fromBundle(arguments!!).selectedProperty
 
-        // 16. 宣告 DetailViewModelFactory 實例
         val viewModelFactory = DetailViewModelFactory(marsProperty, application)
 
-        // 17. 用 ViewModelProvider 宣告出 DetailViewModel 實例
         binding.viewModel = ViewModelProvider(this, viewModelFactory).get(DetailViewModel::class.java)
 
         return binding.root

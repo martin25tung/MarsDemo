@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.martin.marsdemo.network.MarsApi
+import com.martin.marsdemo.network.MarsApiFilter
 import com.martin.marsdemo.network.MarsProperty
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,8 +24,7 @@ class OverviewViewModel : ViewModel() {
     val properties: LiveData<List<MarsProperty>>
         get() = _properties
 
-    // 5. 新增 navigateToSelectedProperty MutableLiveData
-    // 用來導航到 Detail 頁面
+
     private val _navigateToSelectedProperty = MutableLiveData<MarsProperty>()
     val navigateToSelectedProperty: LiveData<MarsProperty>
         get() = _navigateToSelectedProperty
@@ -34,12 +34,15 @@ class OverviewViewModel : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        getMarsRealEstateProperties()
+        // 5. 傳入 MarsApiFilter.SHOW_ALL
+        getMarsRealEstateProperties(MarsApiFilter.SHOW_ALL)
     }
 
-    private fun getMarsRealEstateProperties() {
+    // 3. 在 getMarsRealEstateProperties 新增 MarsApiFilter 參數
+    private fun getMarsRealEstateProperties(filter: MarsApiFilter) {
         coroutineScope.launch {
-            var getPropertiesDeferred = MarsApi.retrofitService.getProperties()
+            // 4. 傳入 filter 參數
+            var getPropertiesDeferred = MarsApi.retrofitService.getProperties(filter.value)
             try {
                 _status.value = MarsApiStatus.LOADING
                 var listResult = getPropertiesDeferred.await()
@@ -59,13 +62,17 @@ class OverviewViewModel : ViewModel() {
         viewModelJob.cancel()
     }
 
-    // 7. 新增顯示詳細頁方法
+
     fun displayPropertyDetails(marsProperty: MarsProperty) {
         _navigateToSelectedProperty.value = marsProperty
     }
 
     fun displayPropertyDetailsComplete() {
-        // 防止重複觸發
         _navigateToSelectedProperty.value = null
+    }
+
+    // 6. 新增 updateFilter 方法
+    fun updateFilter(filter: MarsApiFilter) {
+        getMarsRealEstateProperties(filter)
     }
 }

@@ -104,3 +104,14 @@
 18. MarsProperty： 新增 isRental 參數
 19. DetailViewModel：新增 displayPropertyPrice 與 displayPropertyType 方法用 Transformations.map 轉換資源
 20. fragment_detail：修改資料綁定，改為綁定 viewModel.displayPropertyType
+
+
+## 加上過濾器功能
+
+1. MarsApiService：新增列舉三種過濾狀態
+2. MarsApiService：加上 filter 參數
+3. OverviewViewModel：在 getMarsRealEstateProperties 新增 MarsApiFilter 參數
+4. OverviewViewModel：傳入 filter 參數
+5. OverviewViewModel：傳入 MarsApiFilter.SHOW_ALL
+6. OverviewViewModel：新增 updateFilter 方法
+7. OverviewFragment：在 onOptionsItemSelected 裡，控制 viewModel.updateFilter

@@ -15,7 +15,6 @@ class DetailViewModel(
     app: Application
     ) : AndroidViewModel(app) {
 
-    // 2. 新增 selected 的 MarsProperty LiveData
     private val _selectedProperty = MutableLiveData<MarsProperty>()
     val selectedProperty : LiveData<MarsProperty>
         get() = _selectedProperty
@@ -24,7 +23,6 @@ class DetailViewModel(
         _selectedProperty.value = marsProperty
     }
 
-    // 19. 新增 displayPropertyPrice 與 displayPropertyType 方法用 Transformations.map 轉換資源
     val displayPropertyPrice = Transformations.map(selectedProperty) {
         app.applicationContext.getString(
             when(it.isRental){

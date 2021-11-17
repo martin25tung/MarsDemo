@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.martin.marsdemo.R
 import com.martin.marsdemo.databinding.FragmentOverviewBinding
 import com.martin.marsdemo.databinding.GridViewItemBinding
+import com.martin.marsdemo.network.MarsApiFilter
 
 
 /**
@@ -31,12 +32,10 @@ class OverviewFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        // 11. 實作 OnClickListener
         binding.photosGrad.adapter = PhotoGridAdapter(PhotoGridAdapter.OnClickListener {
             viewModel.displayPropertyDetails(it)
         })
 
-        // 14. 觀察 navigateToSelectedProperty ，導航至DetailFragment
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner) {
             if (null != it) {
                 this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it))
@@ -52,5 +51,17 @@ class OverviewFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.overflow_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    // 7. 在 onOptionsItemSelected 裡，控制 viewModel.updateFilter
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        viewModel.updateFilter(
+            when(item.itemId) {
+                R.id.show_rent_menu -> MarsApiFilter.SHOW_RENT
+                R.id.show_buy_menu -> MarsApiFilter.SHOW_BUY
+                else -> MarsApiFilter.SHOW_ALL
+            }
+        )
+        return true
     }
 }

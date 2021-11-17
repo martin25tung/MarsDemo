@@ -51,7 +51,6 @@ dependencies {
   // implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle"
 
-  // 1. 新增 Navigation 依賴
   // Navigation
   implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
   implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"

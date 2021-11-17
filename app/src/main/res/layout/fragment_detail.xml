@@ -3,9 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-  <!--
-    3. 新增 data binding 的 data 參數
-  -->
   <data>
     <variable
         name="viewModel"
@@ -23,9 +20,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-      <!--
-        4. 在 ImageView 的 imageUrl 新增 viewModel的 selectedProperty.imgSrcUrl
-      -->
 
       <ImageView
           android:id="@+id/main_photo_image"
@@ -37,10 +31,7 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           tools:src="@tools:sample/backgrounds/scenic" />
-      <!--
-        5. 在 TextView 裡加上資料綁定
-        20. 修改資料綁定，改為綁定 viewModel.displayPropertyType
-      -->
+
       <TextView
           android:id="@+id/property_type_text"
           android:layout_width="wrap_content"
