@@ -32,7 +32,6 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
-// 4. 新增一個方法 用 MarsApi 狀態來決定用什麼圖
 @BindingAdapter("marsApiStatus")
 fun bindStatus(statusImageView: ImageView, status: MarsApiStatus?) {
     when (status) {

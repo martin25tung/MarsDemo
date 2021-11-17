@@ -75,3 +75,9 @@
 3. OverviewViewModel：設定取得網路資料的三種狀態
 4. BindingAdapter：新增一個方法 用 MarsApi 狀態來決定用什麼圖
 5. fragment_overview.xml：新增 ImageView 顯示狀態
+
+
+## MarsProperty 序列化
+
+1. Build.gradle：新增 plugins kotlin-parcelize
+2. MarsProperty：將 MarsProperty 宣告成 Parcelize

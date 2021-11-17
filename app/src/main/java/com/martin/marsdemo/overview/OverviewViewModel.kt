@@ -11,12 +11,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
-// 1. 創建一個 MarsApiStatus 列舉三種狀態
 enum class MarsApiStatus{ LOADING, ERROR, DONE }
 
 class OverviewViewModel : ViewModel() {
 
-    // 2. 修改 _status 的資料型別為 MarsApiStatus
     private val _status = MutableLiveData<MarsApiStatus>()
     val status: LiveData<MarsApiStatus>
         get() = _status
@@ -33,7 +31,6 @@ class OverviewViewModel : ViewModel() {
     }
 
     private fun getMarsRealEstateProperties() {
-        // 3. 設定取得網路資料的三種狀態
         coroutineScope.launch {
             var getPropertiesDeferred = MarsApi.retrofitService.getProperties()
             try {
