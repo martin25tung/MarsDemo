@@ -1,7 +1,9 @@
 package com.martin.marsdemo.network
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -10,23 +12,25 @@ import retrofit2.http.GET
 
 private const val BASE_URL = "https://mars.udacity.com/"
 
-// 3. 用 Moshi builder 創建 Moshi 物件
+
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
 private val retrofit = Retrofit.Builder()
-    // 4. 改用 moshi 來轉換 json response
     .addConverterFactory(MoshiConverterFactory.create(moshi))
+    // 2. 讓 retrofit 支援 Coroutine API
+    .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .build()
 
 
-// 6. 更新 MarsApiService
+
 interface MarsApiService {
-    // 改成回傳 MarsProperty
+    // 3. 修改 getProperties()的回傳型態 Deferred
+    // Deferred 是一個可以直接回傳結果的協程
     @GET("realestate")
-    fun getProperties(): Call<List<MarsProperty>>
+    fun getProperties(): Deferred<List<MarsProperty>>
 
 }
 
