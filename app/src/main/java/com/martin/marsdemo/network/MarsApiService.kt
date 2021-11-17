@@ -1,28 +1,35 @@
 package com.martin.marsdemo.network
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
 
 private const val BASE_URL = "https://mars.udacity.com/"
 
-// 2. 使用 Retrofit Builder 跟 ScalarsConverterFactory 創建實例
+// 3. 用 Moshi builder 創建 Moshi 物件
+private val moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
+    .build()
+
 private val retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
+    // 4. 改用 moshi 來轉換 json response
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
     .build()
 
-// 3. 定義 api 介面
-interface MarsApiService {
 
+// 6. 更新 MarsApiService
+interface MarsApiService {
+    // 改成回傳 MarsProperty
     @GET("realestate")
-    fun getProperties(): Call<String>
+    fun getProperties(): Call<List<MarsProperty>>
 
 }
 
-// 4. 創建 MarsApi object 來使用 Retrofit 實作 MarsApiService
 object MarsApi {
     val retrofitService : MarsApiService by lazy {
         retrofit.create(MarsApiService::class.java)

@@ -57,17 +57,19 @@ dependencies {
   // Core with Ktx
   implementation "androidx.core:core-ktx:$version_core"
 
+  // 1. 新增 Moshi 依賴
   // Moshi
   implementation "com.squareup.moshi:moshi:$version_moshi"
   implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
-
-  // 1. 新增 Retrofit 依賴
-  // Retrofit - Deprecated plugins - No more required
-   implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
-   implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
-
   // Retrofit with Moshi Converter
   implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+
+  // 5. 移除 scalars 依賴
+  // Retrofit - Deprecated plugins - No more required
+   implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+//   implementation "com.squareup.retrofit2:converter-scalars:$version_retrofit"
+
+
 
   // Coroutines - Deprecated - No more required
   // implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
