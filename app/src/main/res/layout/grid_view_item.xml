@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
   <data>
-    <!--3. 將 viewModel 改成 MarsProperty type -->
     <variable
         name="property"
         type="com.martin.marsdemo.network.MarsProperty"

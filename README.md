@@ -66,3 +66,12 @@
 11. fragment_overview.xml：將 viewModel.properties 綁在 RecyclerView 上
 12. OverviewFragment：宣告 RecyclerView 的 Adapter 是 PhotoGridAdapter
 13. fragment_overview.xml：將 clipToPadding 為 false
+
+
+## 處理 RecyclerView 錯誤狀態
+
+1. OverviewViewModel：創建一個 MarsApiStatus 列舉三種狀態
+2. OverviewViewModel：修改 _status 的資料型別為 MarsApiStatus
+3. OverviewViewModel：設定取得網路資料的三種狀態
+4. BindingAdapter：新增一個方法 用 MarsApi 狀態來決定用什麼圖
+5. fragment_overview.xml：新增 ImageView 顯示狀態

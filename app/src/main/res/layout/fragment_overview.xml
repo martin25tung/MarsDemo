@@ -13,20 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.android.marsrealestate.MainActivity">
-        <!--
-        5. 將 TextView 改成 RecyclerView
-        想預覽可以加上
-        tools:itemCount="16"
-        tools:listitem="@layout/grid_view_item"
-        這兩個選項
-        設計需求是 recycler view 的外邊匡是8dp 內間隔4dp
-        因為grid_view_item 已經設定 padding = 2dp
-        所以這邊的 padding = 6dp
 
-        11. 將 viewModel.properties 綁在 RecyclerView 上
-
-        13. 將 clipToPadding 為 false
-        -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photos_grad"
             android:layout_width="0dp"
@@ -42,6 +29,19 @@
             app:listData="@{viewModel.properties}"
             tools:itemCount="16"
             tools:listitem="@layout/grid_view_item"
+            />
+
+        <!--
+            5. 新增 ImageView 顯示狀態
+        -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:marsApiStatus="@{viewModel.status}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

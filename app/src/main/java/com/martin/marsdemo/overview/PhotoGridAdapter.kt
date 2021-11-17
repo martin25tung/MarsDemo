@@ -9,8 +9,6 @@ import com.martin.marsdemo.databinding.GridViewItemBinding
 import com.martin.marsdemo.network.MarsProperty
 
 
-// 6. 新增 PhotoGridAdapter 並加上 DiffCallback
-// 7. 新增 DiffCallback 實作
 class PhotoGridAdapter : ListAdapter<MarsProperty, PhotoGridAdapter.MarsPropertyViewHolder>(object : DiffUtil.ItemCallback<MarsProperty>(){
     override fun areItemsTheSame(oldItem: MarsProperty, newItem: MarsProperty): Boolean {
         return oldItem === newItem
@@ -21,7 +19,7 @@ class PhotoGridAdapter : ListAdapter<MarsProperty, PhotoGridAdapter.MarsProperty
     }
 
 }){
-    // 8. 創建 MarsPropertyViewHolder
+
     class MarsPropertyViewHolder(private var binding: GridViewItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(property: MarsProperty) {
             binding.property = property
@@ -29,7 +27,6 @@ class PhotoGridAdapter : ListAdapter<MarsProperty, PhotoGridAdapter.MarsProperty
         }
     }
 
-    // 9. 實作 onCreateViewHolder 功能
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

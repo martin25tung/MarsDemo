@@ -10,14 +10,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+
+// 1. 創建一個 MarsApiStatus 列舉三種狀態
+enum class MarsApiStatus{ LOADING, ERROR, DONE }
+
 class OverviewViewModel : ViewModel() {
 
-    private val _status = MutableLiveData<String>()
-
-    val status: LiveData<String>
+    // 2. 修改 _status 的資料型別為 MarsApiStatus
+    private val _status = MutableLiveData<MarsApiStatus>()
+    val status: LiveData<MarsApiStatus>
         get() = _status
 
-    // 2. 將 _property 改成 List<MarsProperty>
     private val _properties = MutableLiveData<List<MarsProperty>>()
     val properties: LiveData<List<MarsProperty>>
         get() = _properties
@@ -30,17 +33,19 @@ class OverviewViewModel : ViewModel() {
     }
 
     private fun getMarsRealEstateProperties() {
+        // 3. 設定取得網路資料的三種狀態
         coroutineScope.launch {
             var getPropertiesDeferred = MarsApi.retrofitService.getProperties()
             try {
+                _status.value = MarsApiStatus.LOADING
                 var listResult = getPropertiesDeferred.await()
-                _status.value = "Success: ${listResult.size} Mars properties retrieved"
-
+                _status.value = MarsApiStatus.DONE
                 if (listResult.size > 0) {
                     _properties.value = listResult
                 }
             } catch (t: Throwable) {
-                _status.value = "Failure: " + t.message
+                _status.value = MarsApiStatus.ERROR
+                _properties.value = ArrayList()
             }
         }
     }
