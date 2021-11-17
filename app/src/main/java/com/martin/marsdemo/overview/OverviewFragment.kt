@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.martin.marsdemo.R
 import com.martin.marsdemo.databinding.FragmentOverviewBinding
 import com.martin.marsdemo.databinding.GridViewItemBinding
@@ -30,7 +31,18 @@ class OverviewFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        binding.photosGrad.adapter = PhotoGridAdapter()
+        // 11. 實作 OnClickListener
+        binding.photosGrad.adapter = PhotoGridAdapter(PhotoGridAdapter.OnClickListener {
+            viewModel.displayPropertyDetails(it)
+        })
+
+        // 14. 觀察 navigateToSelectedProperty ，導航至DetailFragment
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner) {
+            if (null != it) {
+                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it))
+                viewModel.displayPropertyDetailsComplete()
+            }
+        }
 
         setHasOptionsMenu(true)
 

@@ -23,6 +23,13 @@ class OverviewViewModel : ViewModel() {
     val properties: LiveData<List<MarsProperty>>
         get() = _properties
 
+    // 5. 新增 navigateToSelectedProperty MutableLiveData
+    // 用來導航到 Detail 頁面
+    private val _navigateToSelectedProperty = MutableLiveData<MarsProperty>()
+    val navigateToSelectedProperty: LiveData<MarsProperty>
+        get() = _navigateToSelectedProperty
+
+
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -50,5 +57,15 @@ class OverviewViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    // 7. 新增顯示詳細頁方法
+    fun displayPropertyDetails(marsProperty: MarsProperty) {
+        _navigateToSelectedProperty.value = marsProperty
+    }
+
+    fun displayPropertyDetailsComplete() {
+        // 防止重複觸發
+        _navigateToSelectedProperty.value = null
     }
 }

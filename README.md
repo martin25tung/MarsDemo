@@ -81,3 +81,26 @@
 
 1. Build.gradle：新增 plugins kotlin-parcelize
 2. MarsProperty：將 MarsProperty 宣告成 Parcelize
+
+## Detail 畫面
+
+1. build.gradle：新增 Navigation 依賴
+2. DetailViewModel：新增 selected 的 MarsProperty LiveData
+3. fragment_detail：新增 data binding 的 data 參數
+4. fragment_detail：在 ImageView 的 imageUrl 新增 viewModel的 selectedProperty.imgSrcUrl
+5. fragment_detail：在 TextView 裡加上資料綁定
+6. OverviewViewModel：新增 navigateToSelectedProperty MutableLiveData
+7. OverviewViewModel：新增顯示詳細頁方法
+8. PhotoGridAdapter：創建一個 OnClickListener class
+9. PhotoGridAdapter：在 PhotoGridAdapter 的建構子裡面，新增 onClickListener 的參數
+10. PhotoGridAdapter：pass onClickLister 方法
+11. OverviewFragment：實作 OnClickListener
+12. nav_graph.xml： 加上 selectedProperty 參數
+13. MarsProperty：將 MarsProperty 宣告成 Parcelize
+14. OverviewFragment：觀察 navigateToSelectedProperty ，導航至DetailFragment
+15. DetailFragment：從 fragment arguments 取得 selectedProperty
+16. DetailFragment：宣告 DetailViewModelFactory 實例
+17. DetailFragment：用 ViewModelProvider 宣告出 DetailViewModel 實例
+18. MarsProperty： 新增 isRental 參數
+19. DetailViewModel：新增 displayPropertyPrice 與 displayPropertyType 方法用 Transformations.map 轉換資源
+20. fragment_detail：修改資料綁定，改為綁定 viewModel.displayPropertyType

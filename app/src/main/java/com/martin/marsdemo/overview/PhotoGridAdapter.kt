@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.martin.marsdemo.databinding.GridViewItemBinding
 import com.martin.marsdemo.network.MarsProperty
 
-
-class PhotoGridAdapter : ListAdapter<MarsProperty, PhotoGridAdapter.MarsPropertyViewHolder>(object : DiffUtil.ItemCallback<MarsProperty>(){
+// 9. 在 PhotoGridAdapter 的建構子裡面，新增 onClickListener 的參數
+class PhotoGridAdapter(private val onClickListener: OnClickListener) : ListAdapter<MarsProperty, PhotoGridAdapter.MarsPropertyViewHolder>(object : DiffUtil.ItemCallback<MarsProperty>(){
     override fun areItemsTheSame(oldItem: MarsProperty, newItem: MarsProperty): Boolean {
         return oldItem === newItem
     }
@@ -36,7 +36,16 @@ class PhotoGridAdapter : ListAdapter<MarsProperty, PhotoGridAdapter.MarsProperty
 
     override fun onBindViewHolder(holder: PhotoGridAdapter.MarsPropertyViewHolder, position: Int) {
         val marsProperty = getItem(position)
+        // 10. pass onClickLister 方法
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(marsProperty)
+        }
         holder.bind(marsProperty)
+    }
+
+    // 8. 創建一個 OnClickListener class
+    class OnClickListener(val clickListener: (marsProperty: MarsProperty) -> Unit) {
+        fun onClick(marsProperty: MarsProperty) = clickListener(marsProperty)
     }
 
 }
