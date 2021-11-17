@@ -12,17 +12,15 @@ import kotlinx.coroutines.launch
 
 class OverviewViewModel : ViewModel() {
 
-    // 2. 將 _response 改成 _status
     private val _status = MutableLiveData<String>()
 
     val status: LiveData<String>
         get() = _status
 
-    // 3. 新增 MarsProperty LiveData
-    private val _property = MutableLiveData<MarsProperty>()
-    val property: LiveData<MarsProperty>
-        get() = _property
-
+    // 2. 將 _property 改成 List<MarsProperty>
+    private val _properties = MutableLiveData<List<MarsProperty>>()
+    val properties: LiveData<List<MarsProperty>>
+        get() = _properties
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -38,9 +36,8 @@ class OverviewViewModel : ViewModel() {
                 var listResult = getPropertiesDeferred.await()
                 _status.value = "Success: ${listResult.size} Mars properties retrieved"
 
-                // 4. 將第一個結果給 property
                 if (listResult.size > 0) {
-                    _property.value = listResult[0]
+                    _properties.value = listResult
                 }
             } catch (t: Throwable) {
                 _status.value = "Failure: " + t.message

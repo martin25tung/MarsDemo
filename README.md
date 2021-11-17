@@ -49,3 +49,20 @@
 11. BindingAdapters：用 RequestOptions 來加上 loading 或 error 的圖片
 
 [material icons](https://fonts.google.com/icons)
+
+
+## 套用 RecyclerView
+
+1. Build.gradle：新增 RecyclerView 依賴
+2. OverviewViewModel：將 _property 改成 List<MarsProperty>
+3. grid_view_item.xml：將 viewModel 改成 MarsProperty type
+4. OverviewFragment：改回 FragmentOverviewBinding
+5. fragment_overview.xml：將 TextView 改成 RecyclerView
+6. PhotoGridAdapter：新增 PhotoGridAdapter 並加上 DiffCallback 
+7. PhotoGridAdapter：新增 DiffCallback 實作
+8. PhotoGridAdapter：創建 MarsPropertyViewHolder
+9. PhotoGridAdapter：實作 onCreateViewHolder 功能
+10. bindRecyclerView：新增綁定 RecyclerView 與 submitList 的方法
+11. fragment_overview.xml：將 viewModel.properties 綁在 RecyclerView 上
+12. OverviewFragment：宣告 RecyclerView 的 Adapter 是 PhotoGridAdapter
+13. fragment_overview.xml：將 clipToPadding 為 false

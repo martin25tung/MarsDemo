@@ -23,12 +23,15 @@ class OverviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // 10. 改成用 GridViewItemBinding 顯示
-        val binding = GridViewItemBinding.inflate(inflater)
+        // 4. 改回 FragmentOverviewBinding
+        val binding = FragmentOverviewBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
+
+        // 12. 宣告 RecyclerView 的 Adapter 是 PhotoGridAdapter
+        binding.photosGrad.adapter = PhotoGridAdapter()
 
         setHasOptionsMenu(true)
 
