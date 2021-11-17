@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.martin.marsdemo.R
 import com.martin.marsdemo.databinding.FragmentOverviewBinding
+import com.martin.marsdemo.databinding.GridViewItemBinding
 
 
 /**
@@ -22,8 +23,8 @@ class OverviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-        val binding = FragmentOverviewBinding.inflate(inflater)
+        // 10. 改成用 GridViewItemBinding 顯示
+        val binding = GridViewItemBinding.inflate(inflater)
 
         binding.lifecycleOwner = this
 

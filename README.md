@@ -32,3 +32,20 @@
 6. OverviewViewModel：呼叫 MarsApi.retrofitService.getProperties
 7. OverviewViewModel：我們用 try catch 來取得錯誤資訊
 8. OverviewViewModel：當 viewModel 結束時，必須取消 Coroutine Job
+
+
+## 使用 Glide 讀取網路圖片
+
+1. Build.gradle：新增 Glide 依賴
+2. OverviewViewModel：將 _response 改成 _status
+3. OverviewViewModel：新增 MarsProperty LiveData
+4. OverviewViewModel：將第一個結果給 property  
+5. fragment_overview.xml：將 viewModel.property.imgSrcUrl 呈現在 TextView 上
+6. BindingAdapters：新增能解析 imgUrl 字串成 URI 的 BindingAdapter
+7. BindingAdapters：用 Glide 來 load 圖
+8. grid_view_item.xml：新增 viewModel data
+9. grid_view_item.xml：將 imageUrl 參數設定成 viewModel.property.imgSrcUrl
+10. OverviewFragment：改成用 GridViewItemBinding 顯示
+11. BindingAdapters：用 RequestOptions 來加上 loading 或 error 的圖片
+
+[material icons](https://fonts.google.com/icons)

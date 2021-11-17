@@ -19,7 +19,6 @@ private val moshi = Moshi.Builder()
 
 private val retrofit = Retrofit.Builder()
     .addConverterFactory(MoshiConverterFactory.create(moshi))
-    // 2. 讓 retrofit 支援 Coroutine API
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .build()
@@ -27,8 +26,6 @@ private val retrofit = Retrofit.Builder()
 
 
 interface MarsApiService {
-    // 3. 修改 getProperties()的回傳型態 Deferred
-    // Deferred 是一個可以直接回傳結果的協程
     @GET("realestate")
     fun getProperties(): Deferred<List<MarsProperty>>
 
